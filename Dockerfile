@@ -13,6 +13,7 @@ WORKDIR /var/www/html
 
 # Copia o código do projeto
 COPY . .
+RUN git config --global --add safe.directory /var/www/html
 RUN composer install
 
 # Permissões (importante para o storage e cache)
