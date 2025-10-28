@@ -4,15 +4,17 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     protected $table = 'users';
     /**
@@ -22,14 +24,18 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email_institutional',
+        'email',
         'password',
-        'ra',
+        'RA',
         'phone',
         'photo',
         'user_type',
+        'user_title',
         'status',
         'cpf',
+        'institution_id',
+        'role_id',
+        'course'
     ];
 
     /**
@@ -66,11 +72,6 @@ class User extends Authenticatable
         return $this->hasMany(RacePassenger::class, 'passenger_id');
     }
 
-    public function studentInstitution(): HasOne
-    {
-        return $this->hasOne(StudentInstitution::class, 'student_id');
-    }
-
     public function driverDocuments(): HasOne
     {
         return $this->hasOne(DriverDocument::class, 'user_id');
@@ -84,5 +85,15 @@ class User extends Authenticatable
     public function appraisals(): HasMany
     {
         return $this->hasMany(Review::class, 'appraised_id');
+    }
+
+    public function institution(): BelongsTo
+    {
+        return $this->belongsTo(Institution::class, 'institution_id');
+    }
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class, 'role_id');
     }
 }

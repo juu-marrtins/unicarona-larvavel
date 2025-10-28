@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Institution extends Model
 {
@@ -18,8 +18,8 @@ class Institution extends Model
         'cnpj'
     ];
 
-    public function student(): HasMany
+    public function student(): HasOne
     {
-        return $this->hasMany(User::class, 'student_id');
+        return $this->hasOne(User::class, 'institution_id', 'id');
     }
 }

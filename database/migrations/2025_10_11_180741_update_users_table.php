@@ -12,8 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('email_institutional', 100)
-                ->unique();
             $table->string('RA', 100)
                 ->unique();
             $table->string('phone', 11)
@@ -22,12 +20,13 @@ return new class extends Migration
                 ->nullable();
             $table->enum('user_title', ['student', 'teacher', 'employee'])
                 ->default('student');
-            $table->enum('user_type', ['passenger', 'driver', 'employee'])
+            $table->enum('user_type', ['passenger', 'driver', 'both'])
                 ->default('passenger');
             $table->enum('status', ['verified', 'rejected', 'pending'])
                 ->default('pending');   
             $table->string('cpf', 11)
                 ->unique();
+            $table->string('course', 100);
         });
     }
 

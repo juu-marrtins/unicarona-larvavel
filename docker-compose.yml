@@ -9,12 +9,12 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - laravel_app:/var/www/html
+      - ./:/var/www/html
     depends_on:
       - postgres
-    command: sh -c "php artisan config:clear && php artisan serve --host=0.0.0.0 --port=8000"
+    command: sh -c "php artisan config:clear && php artisan serve --host=0.0.0.0 --port=8000 && sudo chown -R 1000:1000 ./ && sudo chmod -R 775 ./"
 
-  postgres:
+  postgres: 
     image: postgres:18
     container_name: postgres_db
     restart: always
