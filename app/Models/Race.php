@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Race extends Model
 {
+    use HasFactory;
+
     protected $table = 'races';
 
     protected $fillable = [
@@ -16,8 +19,8 @@ class Race extends Model
         'driver_id',
         'vehicle_id',
         'race_data',
-        'departure_date',
-        'arrival_date',
+        'departure_time',
+        'arrival_time',
         'available_seats',
         'total_seats',
         'suggested_value',
@@ -25,7 +28,7 @@ class Race extends Model
         'status'
     ];
 
-    public function racePassengers()
+    public function passengers()
     {
         return $this->hasMany(RacePassenger::class, 'race_id');
     }
@@ -40,7 +43,7 @@ class Race extends Model
         return $this->belongsTo(Address::class, 'origin_id');
     }
 
-    public function destiny():BelongsTo
+    public function destination():BelongsTo
     {
         return $this->belongsTo(Address::class, 'destination_id');
     }
@@ -48,5 +51,10 @@ class Race extends Model
     public function driver(): belongsTo
     {
         return $this->belongsTo(User::class, 'driver_id');
+    }
+
+    public function vehicle(): belongsTo
+    {
+        return $this->belongsTo(Vehicle::class, 'vehicle_id');
     }
 }

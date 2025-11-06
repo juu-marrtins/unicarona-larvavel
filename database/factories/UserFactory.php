@@ -25,10 +25,19 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => fake()->name() . '@edu.com',
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'RA' => fake()->numerify('##########'),
+            'phone' => fake()->numerify('##########'),
+            'user_type' => fake()->randomElement(['passenger', 'driver', 'both']),
+            'user_title' => fake()->randomElement(['student', 'teacher', 'employee']),
+            'status' => fake()->randomElement(['verified', 'rejected', 'pending']),
+            'cpf' => fake()->numerify('###########'),
+            'role_id' => '2',
+            'institution_id' => \App\Models\Institution::factory(),
+            'course' => fake()->randomElement(['tecnico', 'mecanico', 'TADS', 'media', 'tecnica', 'mecanica', 'TAD', 'medias']),
         ];
     }
 

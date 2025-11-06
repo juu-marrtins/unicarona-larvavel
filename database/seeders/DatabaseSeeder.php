@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +11,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $institutions = \App\Models\Institution::factory()
+            ->count(rand(3, 5))
+            ->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        \App\Models\User::factory()
+            ->count(10)
+            ->create([
+                'institution_id' => fn() => $institutions->random()->id
+            ]);
+
+        \App\Models\Vehicle::factory()
+            ->count(rand(3, 5))
+            ->create([
+                'user_id' => fn() => \App\Models\User::factory()->create()->id
+            ]);
+
+        \App\Models\Address::factory()
+            ->count(rand(3, 5))
+            ->create();
     }
 }
