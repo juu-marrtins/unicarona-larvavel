@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Institution extends Model
 {
+    use HasFactory;
+
     protected $table = 'institutions';
 
     protected $fillable = [
         'name',
-        'email_domain',
         'validator',
         'city',
         'state',

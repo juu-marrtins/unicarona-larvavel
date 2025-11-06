@@ -15,13 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('street', 100);
             $table->string('number', 100);
-            $table->string('complement', 100);
+            $table->string('complement', 100)
+                ->nullable();
             $table->string('district', 100);
             $table->string('city', 100);
             $table->string('state', 100);
-            $table->string('cep', 8);
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 10, 8);
+            $table->string('cep', 8)
+                ->nullable();
+            $table->decimal('latitude', 10, 8)
+                ->nullable();
+            $table->decimal('longitude', 10, 8)
+                ->nullable();
             $table->timestamps();
         });
     }

@@ -25,14 +25,14 @@ return new class extends Migration
             $table->foreignId('destination_id')
                 ->constrained('addresses')
                 ->onDelete('cascade');
-            $table->date('race_date');
             $table->time('departure_time');
             $table->time('arrival_time');
             $table->integer('total_seats')
                 ->default(4);
             $table->integer('available_seats')
                 ->default(4);
-            $table->decimal('suggested_value', 10, 2);
+            $table->decimal('suggested_value', 10, 2)
+                ->nullable();
             $table->text('notes')
                 ->nullable();
             $table->enum('status', ['available', 'in_progress', 'finished', 'cancelled'])
