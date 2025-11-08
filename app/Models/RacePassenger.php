@@ -19,7 +19,7 @@ class RacePassenger extends Model
         'request_at'
     ];
 
-    public function user(): BelongsTo
+    public function passenger(): BelongsTo
     {
         return $this->belongsTo(User::class, 'passenger_id');
     }
