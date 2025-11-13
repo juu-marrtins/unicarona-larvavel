@@ -16,8 +16,8 @@ class DriverHomeResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'origin_id' => $this->origin_id,
-            'destination_id' => $this->destination_id,
+            'origin_id' => $this->origin->street . ', ' . $this->origin->city . ' - ' . $this->origin->state,
+            'destination_id' => $this->destination->street . ', ' . $this->destination->city . ' - ' . $this->destination->state,
             'departure_time' => $this->departure_time,
             'arrival_time' => $this->arrival_time,
             'status' => $this->status,
