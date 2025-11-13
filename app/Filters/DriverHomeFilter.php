@@ -28,4 +28,12 @@ class DriverHomeFilter
             });
         }
     }
-}   
+
+    public function status(): void
+    {
+        $this->builder->where(function ($query) {
+            $query->where('status', 'finished')
+                ->orWhere('status', 'cancelled');
+        });
+    }
+}
