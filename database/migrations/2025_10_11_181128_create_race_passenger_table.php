@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('passenger_id')
                 ->constrained('users')
                 ->onDelete('cascade');
-            $table->decimal('price', 10, 2);
             $table->enum('status', ['requested', 'accepted', 'refused', 'cancelled','completed'])
                 ->default('requested');
             $table->timestamps();
