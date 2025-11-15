@@ -19,7 +19,7 @@ class DriverHomeFilter
 
     public function search(): void
     {
-        if ($term = data_get($this->data, 'search')) {
+        if ($term = $this->data) {
             $this->builder->where(function ($query) use ($term) {
                 $query->whereHas('passanger', function ($q) use ($term) {
                     $q->where('name', 'like', "%{$term}%")

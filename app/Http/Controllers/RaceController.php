@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\FormatResponse\ApiResponse;
 use App\Services\RaceService;
 use App\Http\Requests\Race\CreateRaceRequest;
+use App\Http\Requests\RequestRideRequest;
 
 class RaceController extends Controller
 {
@@ -20,6 +21,16 @@ class RaceController extends Controller
             'Corrida criada com sucesso!',
             201,
             $race
+        );
+    }
+
+    public function requestRace(RequestRideRequest $request)
+    {
+        $requested  = $this->raceService->requestRace($request->validated());
+        return ApiResponse::success(
+            'Passagem solicitada com sucesso!',
+            201,
+            $requested
         );
     }
 }

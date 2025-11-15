@@ -37,4 +37,16 @@ class UserService
 
         return $user;
     }
+
+    public function findById(int $id): User
+    {
+        $user = $this->userRepository->findById($id);
+
+        if(!$user)
+        {
+            throw new UserNotFoundException($id);
+        }
+
+        return $user;
+    }   
 }
