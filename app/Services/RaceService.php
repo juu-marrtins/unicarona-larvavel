@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Exceptions\Address\AddressCreateException;
 use App\Repositories\RaceRepository;
-use App\Helpers\AuthUtils as AuthUtils;
+use App\Helpers\AuthUtils;
 use App\Http\Resources\RaceResource;
 use Illuminate\Support\Facades\DB;
 use App\Services\AddressService;

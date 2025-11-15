@@ -16,16 +16,16 @@ class RegisterRequest extends FormRequest
     {
         return true;
     }
+
     protected function prepareForValidation()
-    {
-        $fieldsToClean = ['cpf', 'cnpj'];
-        $cleanData = []; foreach ($fieldsToClean as $field) {
-        if ($this->has($field) && !empty($this->input($field))) {
-            $cleanData[$field] = preg_replace('/\D/', '', $this->input($field));
+    {    $numericFields = ['cpf', 'cnpj'];
+
+        foreach ($numericFields as $field) {
+            if ($this->filled($field)) {
+                $this->merge([
+                    $field => preg_replace('/\D/', '', $this->input($field))
+                ]);
             }
-        } 
-        if (!empty($cleanData)) {
-            $this->merge($cleanData);
         }
     }
 
@@ -44,7 +44,7 @@ class RegisterRequest extends FormRequest
             'course' => ['required', 'string', 'max:255'],
             'phone'=> ['required', 'string', 'max:11'],
             'user_type'=> ['required', 'string', 'in:driver,passenger,both'],
-            'user_title'=> ['required', 'string', 'in:student,professor,employee'],
+            'user_title'=> ['required', 'string', 'in:student,teacher,employee'],
             'cpf'=> ['required', 'string', 'max:14', new CPFRule()],
             'cnpj' => ['required', 'string', 'max:18', new CNPJRule()],
         ];
