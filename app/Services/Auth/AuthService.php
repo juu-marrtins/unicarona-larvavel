@@ -26,8 +26,8 @@ class AuthService
         $institutionData = [
             'name' => $extractData['nome'],
             'cnpj' => $data['cnpj'],
-            'city' => $extractData['uf'],
-            'state' => $extractData['municipio'] . ' - ' . $extractData['logradouro'] . ' - ' . $extractData['bairro'] .' - ' . $extractData['numero'],
+            'city' => $extractData['municipio'],
+            'state' => $extractData['uf'] . ' - ' . $extractData['logradouro'] . ' - ' . $extractData['bairro'] .' - ' . $extractData['numero'],
             'validator' => "receitasw"
         ];
 
@@ -41,6 +41,7 @@ class AuthService
             'user_title' => $data['user_title'],
             'cpf' => $data['cpf'],
             'course' => $data['course'],
+            'role_id' => 2
         ];
 
         return DB::transaction(function () use ($institutionData, $userData, $extractData) {

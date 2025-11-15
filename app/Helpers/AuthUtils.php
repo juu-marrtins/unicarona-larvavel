@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Support\Facades\Auth;
 
-class authUtils
+class AuthUtils
 {
     public function userAuthenticated()
     {
@@ -14,5 +14,10 @@ class authUtils
     public function vehicleOfUser()
     {
         return $this->userAuthenticated()->vehicle;
+    }
+
+    public function InstiutionOfUser()
+    {
+        return $this->userAuthenticated()->institution;
     }
 }

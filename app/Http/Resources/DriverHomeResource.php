@@ -28,7 +28,13 @@ class DriverHomeResource extends JsonResource
                 'user' => [
                     'id' => $p->passenger->id,
                     'name' => $p->passenger->name,
-                    'type' => $p->passenger->user_title,
+                    'title' => match($p->passenger->user_title)
+                    {
+                        'student' => 'Estudante',
+                        'teacher' =>  'Professor',
+                        'employee' => 'Funcionario',
+                        default => 'Estudante'
+                    }
                 ],
             ]),
         ];

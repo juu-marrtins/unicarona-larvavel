@@ -7,11 +7,11 @@ use App\Models\Race;
 
 class PassangerHomeRepository
 {
-    public function listRaces(int $page, int $perPage,array $filterData)
+    public function listRaces(int $page, int $perPage, $search)
     {
         $query = (new PassangerHomeFilter(
             Race::where('status', 'available'), 
-            $filterData
+            $search
         ))->applyFilter();
 
         return $query->paginate($perPage, ['*'], 'page', $page);
